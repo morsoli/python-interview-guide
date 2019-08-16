@@ -32,7 +32,8 @@
       - [类成员](#类成员)
       - [类成员的修饰符](#类成员的修饰符)
       - [类的特殊成员](#类的特殊成员)
-    - [Python中的元类(metaclass)](#python中的元类metaclass)
+    - [Python 中的元编程和反射](#python-中的元编程和反射)
+    - [谈谈对 Python 和其他语言的区别](#谈谈对-python-和其他语言的区别)
     - [设计模式](#设计模式)
       - [单例模式](#单例模式)
       - [工厂模式](#工厂模式httpssegmentfaultcoma1190000013053013)
@@ -108,6 +109,7 @@
     - [内存缓存（Redis和Memcached)](#内存缓存redis和memcached)
     - [Redis的使用](#redis的使用)
 - [最佳实践](#最佳实践)
+  - [编码规范](#编码规范)
   - [正确的流程开发](#正确的流程开发httpswwwzhihucomquestion300762444answer529335326appzhihuliteutm_sourcezhihusignmtu2mda2nzmzmzyznwutm_mediumsocialutm_oi758575502888824800invite_code7jv2ek)
   - [单元测试](#单元测试)
   - [CI/CD工具篇](#cicd工具篇)
@@ -463,7 +465,8 @@ print(obj)
 10. __iter__用于迭代器，之所以列表、字典、元组可以进行for循环。
 11. `__new__和__init__`
 `__new__`是一个静态方法，而`__init__`是一个实例方法，`__new__`方法会返回一个创建的实例，而`__init__`什么都不返回，当创建一个新实例时调用`__new__`，初始化一个实例时用`__init__`。
-##### Python中的元类(metaclass)
+##### Python 中的元编程和反射
+##### 谈谈对 Python 和其他语言的区别
 ##### 设计模式
 ###### 单例模式
 1. 使用new方法
@@ -1188,6 +1191,19 @@ anchor             锚
 * Redis 实现分布式锁：
 ### 最佳实践
 * [Phodal的全栈增长工程师实战](http://growth-in-action.phodal.com/)
+#### 编码规范
+* PEP8
+* Python 之禅
+* 了解 dosctring
+* 了解类型注解么
+* Python 对象的命名规范，例如方法或者类等
+* Python 中的注释
+* 优雅的给一个函数加注释
+* 给变量加注释
+* Python 代码缩进中是否支持 Tab 键和空格混用
+* 是否可以在一句 import 中导入多个库
+* 在给 Py 文件命名的时候需要注意什么
+* 例举几个规范 Python 代码风格的工具
 #### [正确的流程开发](https://www.zhihu.com/question/300762444/answer/529335326?app=zhihulite&utm_source=zhihu&sign=MTU2MDA2NzMzMzYzNw==&utm_medium=social&utm_oi=758575502888824800&invite_code=7JV2EK)
   1. 用GitHub或类似的现代平台
   2. 平台上设置禁止直接push到主干，所有的修改必须fork后走Pull Request
