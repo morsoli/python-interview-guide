@@ -3,7 +3,6 @@ from random import randint
 # 1.确认python版本
 # 2.遵循PEP8风格
 # 3.了解bytes、str与unicode的区别
-
 # 接受bytes或str,总是返回str
 def to_str(bytes_or_str):
     if isinstance(bytes_or_str, bytes):
@@ -21,7 +20,6 @@ def to_bytes(bytes_or_str):
     return value
 
 # 4.用辅助函数取代复杂的表达式
-
 my_values = parse_qs('red=5&blue=4&green=', keep_blank_values=True)
 print(my_values)
 # 待查询参数不存在或者查询参数的值为空白时返回0
@@ -86,7 +84,6 @@ print(longest_name, max_letters)
 
 # 12. 不要在for和while循环后面写else块
 # 13. 合理利用try/except/else/finally结构中的每个代码块
-
 def load_json_key(data, key):
     try:
         result_dict = json.loads(data)
