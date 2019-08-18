@@ -10,21 +10,25 @@
   - [面试总结](#面试总结)
 - [技术部分](#技术部分)
   - [语言特性篇](#语言特性篇)
+    - [谈谈对 Python 和其他语言的区别](#谈谈对-python-和其他语言的区别)
     - [Python2和Python3的区别](#python2和python3的区别)
     - [闭包](#闭包)
     - [装饰器(面向切面编程AOP)](#装饰器httpsfoofishnetpython-decoratorhtml面向切面编程aop)
     - [协程](#协程httpswwwcnblogscomzhaofp7631851html)
     - [Python垃圾回收机制(GC)](#python垃圾回收机制gchttpsmpweixinqqcoms__bizmzu1nzuzmziynwmid2247483786idx1snd9e490ff84da3140483595399ac9cc95chksmfc3510cecb4299d8230be48a50ac125b7dec379a654b50de0f28d1510879eb82b5ff5b0c1033mpshare1scene1srcidsharer_sharetime1565661971268sharer_shareidd8d88a642b42a12a54cd09298c974b8crd)
     - [全局解释锁 GIL](#全局解释锁-gilhttpswwwlmlphpcomuser6793articleitem349814)
-    - [Python的参数传递](#python的参数传递)
+    - [Python传参](#python传参)
     - [Python 深拷贝和浅拷贝](#python-深拷贝和浅拷贝)
     - [鸭子类型](#鸭子类型)
     - [猴子补丁](#猴子补丁)
     - [Python中的作用域](#python中的作用域)
-    - [lambda函数](#lambda函数)
     - [Python函数式编程](#python函数式编程)
+      - [lambda函数](#lambda函数)
+      - [map函数](#map函数)
+      - [reduce函数](#reduce函数)
+      - [filter函数](#filter函数)
     - [迭代器和生成器](#迭代器和生成器)
-    - [Python自省](#python自省)
+    - [Python自省和反射](#python自省和反射httpswwwcnblogscomhuxiarchive201101021924317html)
     - [Python 面对对象编程](#python-面对对象编程)
       - [封装](#封装)
       - [继承](#继承)
@@ -32,8 +36,7 @@
       - [类成员](#类成员)
       - [类成员的修饰符](#类成员的修饰符)
       - [类的特殊成员](#类的特殊成员)
-    - [Python 中的元编程和反射](#python-中的元编程和反射)
-    - [谈谈对 Python 和其他语言的区别](#谈谈对-python-和其他语言的区别)
+    - [Python 中的元编程](#python-中的元编程)
     - [设计模式](#设计模式)
       - [单例模式](#单例模式)
       - [工厂模式](#工厂模式httpssegmentfaultcoma1190000013053013)
@@ -161,7 +164,19 @@
 * 真正有用的部分，哈哈😄
 #### 语言特性篇
 * 主要参考：[《流畅的Python》](https://book.douban.com/subject/27028517/)
+##### 谈谈对 Python 和其他语言的区别
+* Python就是强类型、动态类型的语言
 ##### Python2和Python3的区别
+* python2中，print是个特殊语句，python3中print是函数。
+* python中有两种字符类型：字节字符串和文本字符串。
+
+| 版本 | python2| python3 |
+| -----| ---- | ---- |
+| 字节字符串 | str | bytes |
+| 文本字符串 | Unicode | str |
+* python2中默认的字符串类型默认是ASCII，python3中默认的字符串类型是Unicode。
+* python2中除法`/`的结果是整型，python3中是浮点类型。
+* python2中默认类是旧式类，需要显式继承新式类（object）来创建新式类。python3中完全移除旧式类，所有类都是新式类，但仍可显式继承object类。
 ##### 闭包
 * 闭包指延伸(延伸的意思是seriers在average函数用，但在average_nums中定义的)了作用域的函数，访问定义体之外定义的非全局变量。创建一个闭包必须满足以下几点:
     - 必须有一个内嵌函数
@@ -202,7 +217,7 @@ def test(a):
 test(3)
 ```
 ##### [装饰器](https://foofish.net/python-decorator.html)(面向切面编程AOP)
-* 闭包的一个重要应用就是装饰器，函数装饰器在导入模块时立即执行，被装饰的函数只在明确调用时执行。装饰器采用语法糖，使用方便，既可以自定义在装饰器中指定日志级别，也可以使用官方提供的预激协程装饰器等等。
+* 闭包的一个重要应用就是装饰器，函数装饰器在导入模块时立即执行，被装饰的函数只在明确调用时执行。装饰器采用语法糖，使用方便，用途多样，既可以自定义在装饰器中指定日志级别，也可以使用官方提供的预激协程装饰器等等。
 ``` python
 # 手动实现一个带参数的装饰器
 def use_arg(argument):
@@ -293,18 +308,71 @@ for t in threads:
 print(n)
 ```
 * 剖析程序性能：内置profile/cprofile工具，使用pyflame(uber开源)工具分析web应用。
-##### Python的参数传递
-* args and *kwargs
+##### Python传参
+* 主要参考
+    - [Python传入参数的几种方法](https://blog.csdn.net/abc_12366/article/details/79627263)
+* Python中参数传递方式：位置传递、默认参数、可变参数、关键字参数、命名关键字参数
+* Python 函数参数传递实际叫传对象（call by object），可以把不可变对象传参理解为传值，可变对象参数理解为传引用。
 ##### Python 深拷贝和浅拷贝
+* 浅拷贝(copy)拷贝父对象，不会拷贝对象的内部的子对象。深拷贝(deepcopy)完全拷贝了父对象及其子对象。
+```python
+import copy
+a = [1, 2, 3, 4, ['a', 'b']] #原始对象
+b = a                       #赋值，传对象的引用
+c = copy.copy(a)            #对象拷贝，浅拷贝
+d = copy.deepcopy(a)        #对象拷贝，深拷贝
+a.append(5)                 #修改对象a
+a[4].append('c')            #修改对象a中的['a', 'b']数组对象
+```
 ##### 鸭子类型
+* 鸭子类型就是：如果走起路来像鸭子，叫起来也像鸭子，那么它就是鸭子（If it walks like a duck and quacks like a duck, it must be a duck）。鸭子类型是编程语言中动态类型语言中的一种设计风格，一个对象的特征不是由父类决定，而是通过对象的方法决定的。（重点关注接口，不关注对象）
+```python
+class Dog(Animal):
+    def run(self):
+        print('Dog is running...')
+
+class Cat(Animal):
+    def run(self):
+        print('Cat is running...')
+```
 ##### 猴子补丁
+* Monkey patch就是在运行时对已有的代码进行修改，达到hot patch的目的。运行时动态替换模块的方法，运行时动态增加模块的方法（慎用）
+```python
+class Foo(object):
+    def bar(self):
+        print('Foo.bar')
+def bar(self):
+    print('Modified bar')
+Foo().bar()
+Foo.bar = bar
+Foo().bar()
+```
 ##### Python中的作用域
-##### lambda函数
+* Python的作用域一共有4种: L （Local） 局部作用域，E （Enclosing） 闭包函数外的函数中，G （Global） 全局作用域，B （Built-in） 内建作用域。以 L –> E –> G –>B 的规则查找，即：在局部找不到，便会去局部外的局部找（例如闭包），再找不到就会去全局找，再者去内建中找。
 ##### Python函数式编程
+###### lambda函数
+* lambda 定义了一个匿名函数，lambda 并不会带来程序运行效率的提高，只会使代码更简洁。使用lambda内不要包含循环，如果有，定义函数来完成，使代码获得可重用性和更好的可读性。lambda 是为了减少单行函数的定义而存在的。
+```python
+ list(map(lambda x: x * x, [1, 2, 3, 4, 5, 6, 7, 8, 9]))
+# [1, 4, 9, 16, 25, 36, 49, 64, 81]
+```
+###### map函数
+* map()函数接收两个参数，一个是函数，一个是Iterable，map将传入的函数依次作用到序列的每个元素，并把结果作为新的Iterator返回。
+###### reduce函数
+* reduce把一个函数作用在一个序列[x1, x2, x3, ...]上，这个函数必须接收两个参数，reduce把结果继续和序列的下一个元素做累积计算，其效果就是：
+`reduce(f, [x1, x2, x3, x4]) = f(f(f(x1, x2), x3), x4)`
+###### filter函数
+* filter()函数用于过滤序列。filter()接收一个函数和一个序列，把传入的函数依次作用于每个元素，然后根据返回值是True还是False决定保留还是丢弃该元素。
+```python
+def is_odd(n):
+    return n % 2 == 1
+list(filter(is_odd, [1, 2, 4, 5, 6, 9, 10, 15]))
+# 结果: [1, 5, 9, 15]
+```
 ##### 迭代器和生成器
 * 主要参考
     - [Python中的可迭代对象、迭代器和生成器的异同点](https://blog.csdn.net/SL_World/article/details/86507872)
-##### Python自省
+##### [Python自省和反射](https://www.cnblogs.com/huxi/archive/2011/01/02/1924317.html)
 ##### Python 面对对象编程
 ###### 封装
 * 将内容封装到某处
@@ -471,8 +539,7 @@ print(obj)
 10. __iter__用于迭代器，之所以列表、字典、元组可以进行for循环。
 11. `__new__和__init__`
 `__new__`是一个静态方法，而`__init__`是一个实例方法，`__new__`方法会返回一个创建的实例，而`__init__`什么都不返回，当创建一个新实例时调用`__new__`，初始化一个实例时用`__init__`。
-##### Python 中的元编程和反射
-##### 谈谈对 Python 和其他语言的区别
+##### Python 中的元编程
 ##### 设计模式
 ###### 单例模式
 1. 使用new方法
