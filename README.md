@@ -682,7 +682,31 @@ class Solution:
         second.next = second.next.next  # 删除相应的结点
         return head
 ```
-* 判断链表是否有环
+* 有序链表合并
+```python
+# leetcode 21
+# 解题思路：合并后的链表仍然是有序的，可以同时遍历两个链表，
+# 每次选取两个链表中较小值的节点，依次连接起来，就能得到最终的链表
+class Solution:
+    def mergeTwoLists(self, l1: ListNode, l2: ListNode) -> ListNode:
+        if not l1 or not l2:
+            return l1 or l2
+        head=cur=ListNode(0)
+        while l1 and l2:
+            if l1.val<l2.val:
+                cur.next=l1
+                l1=l1.next
+            else:
+                cur.next=l2
+                l2=l2.next
+            cur=cur.next
+        cur.next=l1 or l2
+        return head.next
+```
+* 链表有环问题
+    * 判断链表是否有环
+    * 定位环入口
+    * 计算环长度
 * 使用链表实现大数加法
 ```python
 # leetcode 2
@@ -723,9 +747,110 @@ class Solution:
         return head.next
 ```
 * 删除链表中节点，要求时间复杂度为O(1)
-* 反转链表
+```python
+# leetcode 237
+class Solution:
+    def deleteNode(self, node):
+        """
+        :type node: ListNode
+        :rtype: void Do not return anything, modify node in-place instead.
+        """
+        next_node=node.next
+        next_nextnode=next_node.next
+        node.val=next_node.val
+        node.next=next_nextnode
+```
 * 从尾到头打印链表
+```python
+# 根据栈的特性
+class Solution:
+    def printListFromTailToHead(self, listNode):
+        if listNode is None:
+            return []
+        sta=list()
+        res=list()
+        while listNode:
+            sta.append(listNode.val)
+            listNode=listNode.next
+        while sta:
+            res.append(sta.pop())
+        return res
+# 递归
+class Solution:
+    def printListFromTailToHead(self, listNode):
+        if listNode is None:
+            return []
+        return self.printListFromTailToHead(listNode.next)+[listNode.val]
+```
+* 反转链表
+```python
+# leetcode 206
+class Solution:
+    def reverseList(self, head: ListNode) -> ListNode:
+        pre=None
+        # 不断取出和向后移动头节点,并将头节点连接到新头节点后面
+        while head:
+            next_node=head.next
+            head.next=pre
+            pre=head
+            head=next_node
+        return pre
+
+```
 * LRU缓存机制
+```python
+# leetcode 146:
+# 字典（哈希）+双端链表
+class Node(object): 
+    def __init__(self, key, val):
+        self.key = key
+        self.val = val
+        self.next = None
+        self.prev = None
+        
+class LRUCache(object):
+ 
+    def __init__(self, capacity):
+        self.dic = {}
+        self.capacity = capacity
+        self.dummy_head = Node(0, 0)
+        self.dummy_tail = Node(0, 0)
+        self.dummy_head.next = self.dummy_tail
+        self.dummy_tail.prev = self.dummy_head
+ 
+    def get(self, key):
+        if key not in self.dic:
+            return -1
+        node = self.dic[key]
+        self.remove(node)
+        self.append(node)
+        return node.val
+ 
+    def put(self, key, value):
+        if key in self.dic:
+            self.remove(self.dic[key])
+        node = Node(key, value)
+        self.append(node)
+        self.dic[key] = node
+ 
+        if len(self.dic) > self.capacity:
+            head = self.dummy_head.next
+            self.remove(head)
+            del self.dic[head.key]
+ 
+    def append(self, node):
+        tail = self.dummy_tail.prev
+        tail.next = node
+        node.prev = tail
+        self.dummy_tail.prev = node
+        node.next = self.dummy_tail
+ 
+    def remove(self, node):
+        prev = node.prev
+        next = node.next
+        prev.next = next
+        next.prev = prev
+```
 ##### 栈和队列算法
 * [以下几个算法原理详解](https://mp.weixin.qq.com/s?__biz=MzUyNjQxNjYyMg==&mid=2247484846&idx=2&sn=e508da06e9f7a0b3d00db5415d7ce622&chksm=fa0e6a2fcd79e3397fe8083f9493ae639f47c9448ac2a0026026494d098c47ecc6e08f1f8e28&scene=21#wechat_redirect)
 * 有效的括号
