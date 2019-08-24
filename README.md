@@ -14,7 +14,6 @@
     - [Python2和Python3的区别](#python2和python3的区别)
     - [闭包](#闭包)
     - [装饰器(面向切面编程AOP)](#装饰器httpsfoofishnetpython-decoratorhtml面向切面编程aop)
-    - [协程](#协程httpswwwcnblogscomzhaofp7631851html)
     - [Python垃圾回收机制(GC)](#python垃圾回收机制gchttpsmpweixinqqcoms__bizmzu1nzuzmziynwmid2247483786idx1snd9e490ff84da3140483595399ac9cc95chksmfc3510cecb4299d8230be48a50ac125b7dec379a654b50de0f28d1510879eb82b5ff5b0c1033mpshare1scene1srcidsharer_sharetime1565661971268sharer_shareidd8d88a642b42a12a54cd09298c974b8crd)
     - [全局解释锁 GIL](#全局解释锁-gilhttpswwwlmlphpcomuser6793articleitem349814)
     - [Python传参](#python传参)
@@ -28,7 +27,7 @@
       - [reduce函数](#reduce函数)
       - [filter函数](#filter函数)
     - [迭代器和生成器](#迭代器和生成器)
-    - [Python自省和反射](#python自省和反射httpswwwcnblogscomhuxiarchive201101021924317html)
+    - [协程](#协程)
     - [Python 面对对象编程](#python-面对对象编程)
       - [封装](#封装)
       - [继承](#继承)
@@ -36,6 +35,7 @@
       - [类成员](#类成员)
       - [类成员的修饰符](#类成员的修饰符)
       - [类的特殊成员](#类的特殊成员)
+    - [Python自省和反射](#python自省和反射httpswwwcnblogscomhuxiarchive201101021924317html)
     - [Python 中的元编程](#python-中的元编程)
     - [设计模式](#设计模式)
       - [单例模式](#单例模式)
@@ -45,9 +45,12 @@
     - [链表算法](#链表算法httpsmpweixinqqcoms__bizmzuynjqxnjyymgmid2247484830idx1sn9d24fc787da4b49b82ac01c7f8de257bchksmfa0e6a1fcd79e309a2e7f3e09ec9913a55f1c077287c907f13528578b7785831a2effb3104e0scene21wechat_redirect)
     - [栈和队列算法](#栈和队列算法)
     - [二叉树算法](#二叉树算法)
+      - [四种遍历方式](#四种遍历方式)
+      - [二叉树中的一些重要属性](#二叉树中的一些重要属性)
     - [字符串算法](#字符串算法)
     - [哈希算法](#哈希算法)
     - [Backtracking回溯法(又称DFS,递归)全解](#backtracking回溯法又称dfs递归全解httpssegmentfaultcoma1190000006121957)
+    - [动态规划](#动态规划)
     - [2018 秋招笔试面经](#2018-秋招笔试面经httpsgithubcomimhuayalgorithm_interview_notes-chinesetreemasterd-笔试面经一面)
   - [操作系统篇](#操作系统篇)
     - [进程与线程区别](#进程与线程区别)
@@ -159,6 +162,7 @@
   - 第二个阶段冲刺：经过了第一个阶段的被虐之后，每个人的面试能力都会加强很多，而且找到了一些面试的感觉，对面试的节奏、对答都有了更好的把控。这个时候第二个阶段，就可以尝试去冲刺一下阿里、美团、滴滴等国内的一些大厂了。在这个阶段里，你需要全力以赴去面试，如果你准备的很充分，经过了第一阶段的打磨提升了面试能力和经验，而且本身的一些学历、过往公司履历相对较好，同时你的一些软素质比如说学习能力、表达能力、沟通能力都比较好，那么在这个阶段相对就会有更大的把握拿到大厂的offer了。但是如果冲刺了一些大厂之后，感觉还是有一定的差距导致没拿到大厂的offer呢？其实这也是很正常的一个现象，因为毕竟大厂的面试官问的问题可能会更难，让你更加难以承受，可能会暴露出来你更多的问题。在面大厂的过程中暴露出来的问题，很多时候就不是准备充分与否的问题了，而是可能暴露出来你的技术能力和知识体系的欠缺，很多东西可能你根本就不会。这对你来说是好事情，因为你通过面试大厂，瞬间会明白自己跟大厂之间的技术差距。这个时候有些技术能力跟大厂欠缺很大的同学一下子会被极大的打击自己的自信心，建议大家暂停一下面试的过程。这时，你完全可以将面大厂过程暴露出来的自己的技术能力的欠缺记录一个清单，然后有针对性的找一些技术资料来对这些不足之处进行学习和准备，尽可能的弥补自己的欠缺。
   - 第三个阶段收尾：假如说你的面试进行到了这个阶段，那么很不好意思，说明几个你最心仪的大厂没能进去。不过也没关系，这个时候如果你针对自己的技术短板进行突击学习之后，相信你的技术能力又会有一个成长和提高。此时你就应该针对你的跳槽进行收尾了，这个时候你可以投递一些中大型互联网公司的职位，同时再加上一些比较好的独角兽企业的职位，或者是一些你感觉技术氛围比较好的中小型互联网公司的职位。从笔者指导过的一些同学来看，你的面试能力积累到这个程度，基本上拿下一些offer是已经没问题了，你面试的时候都会比较游刃有余了。然后接着就可以在收获的几个比较好的offer里选择一个各方面最适合自己的offer。
 #### 面试总结
+* 本来我认为自己使用过的技术掌握就行，技术面试靠“面试总结”有点死记硬背应付的赶脚，但是一个面试老前辈说针对面试常见问题的进行记忆也是为了提升面试效果，再说技术广度如此大，要是都用过会被严重怀疑是个码农，不能从底层发现问题，只会照着api和框架coding，这也是为自己写这份总结的原因。
 * 总结起来，面试是一场持久战，要软硬兼备。硬性条件：面试官考察候选人的时候主要是从技术广度、技术深度、基础功底、系统设计、项目经验几个角度来进行的，软性条件：表达交流能力和运气。
 ### 技术部分
 * 真正有用的部分，哈哈😄
@@ -233,55 +237,6 @@ def demo():
     pass
 demo()
 ```
-##### [协程](https://www.cnblogs.com/zhaof/p/7631851.html)
-* 协程调用细节：实际上next()和send()在一定意义上作用是相似的，区别是send()可以传递yield表达式的值进去，而next()不能传递特定的值，只能传递None进去。因此，我们可以看做c.next() 和 c.send(None) 作用是一样的。第一次调用时，请使用next()语句或是send(None)，不能使用send发送一个非None的值，否则会出错的，因为没有Python yield语句来接收这个值。
-* send执行的顺序。n1 = yield r这句话是从右往左执行的。当第一次send（None）时，启动生成器，从生成器函数的第一行代码开始执行，直到第一次执行完yield后，跳出生成器函数。这个过程中，n1一直没有定义。运行到send（1）时，进入生成器函数，此时，将yield r看做一个整体，赋值给它并且传回。此时即相当于把1赋值给n1，但是并不执行yield部分。下面继续从yield的下一语句继续执行，然后重新运行到yield语句，执行后，跳出生成器函数。即send和next相比，只是开始多了一次赋值的动作，其他运行流程是相同的。
-```python
-def consumer():
-    r = 'hello'
-    while True:
-        n1=yield r  #这里的等式右边相当于一个整体，接受回传值
-        if not n1:
-            return
-        print('[CONSUMER] Consuming %s...' % n1)
-        r='%d00 OK' % n1
-c = consumer()
-c.__next__()
-n=0
-while n<3:
-    n=n+1
-    r1=c.send(n)
-    print('[PRODUCER] Consumer return: %s' % r1)
-c.close()
-```
-* 预激装饰器，使用协程之前必须预激，为了避免忘记，可以在协程上使用一个特殊的装饰器。
-```python
-from functools import wraps
-def corountine(func):
-    @wraps(func)                      
-    # functools.wraps 则可以将原函数对象的指定属性复制给包装函数对象, 默认有 __module__、__name__、__doc__,或者通过参数选择
-    def primer(*args, **kwargs):       # 把被装饰的生成器函数替换成这里的 primer 函数；调用 primer 函数时，返回预激后的生成器
-        gen = func(*args, **kwargs)    # 调用被装饰的函数，获取生成器对象。
-        next(gen)                      # 预激生成器
-        return gen                     # 返回生成器
-    return primer
-    
-@corountine               # 预激装饰器
-def coro_average():
-    total = 0.0
-    count = 0
-    average = None
-    while 1:
-        term = yield average
-        total += term
-        count += 1
-        average = total/count
-coro3 = coro_average()
-print (coro3.send(5))
-print (coro3.send(7))
-print (coro3.send(10))
-coro3.close()
-````
 ##### [Python垃圾回收机制(GC)](https://mp.weixin.qq.com/s?__biz=MzU1NzUzMzIyNw==&mid=2247483786&idx=1&sn=d9e490ff84da3140483595399ac9cc95&chksm=fc3510cecb4299d8230be48a50ac125b7dec379a654b50de0f28d1510879eb82b5ff5b0c1033&mpshare=1&scene=1&srcid=&sharer_sharetime=1565661971268&sharer_shareid=d8d88a642b42a12a54cd09298c974b8c#rd)
 * 引用计数
 * 标记-清除机制
@@ -372,7 +327,57 @@ list(filter(is_odd, [1, 2, 4, 5, 6, 9, 10, 15]))
 ##### 迭代器和生成器
 * 主要参考
     - [Python中的可迭代对象、迭代器和生成器的异同点](https://blog.csdn.net/SL_World/article/details/86507872)
-##### [Python自省和反射](https://www.cnblogs.com/huxi/archive/2011/01/02/1924317.html)
+##### 协程
+* 主要参考
+    - [Python协程深入理解](https://www.cnblogs.com/zhaof/p/7631851.html)
+* 协程调用细节：实际上next()和send()在一定意义上作用是相似的，区别是send()可以传递yield表达式的值进去，而next()不能传递特定的值，只能传递None进去。因此，我们可以看做c.next() 和 c.send(None) 作用是一样的。第一次调用时，请使用next()语句或是send(None)，不能使用send发送一个非None的值，否则会出错的，因为没有Python yield语句来接收这个值。
+* send执行的顺序。n1 = yield r这句话是从右往左执行的。当第一次send（None）时，启动生成器，从生成器函数的第一行代码开始执行，直到第一次执行完yield后，跳出生成器函数。这个过程中，n1一直没有定义。运行到send（1）时，进入生成器函数，此时，将yield r看做一个整体，赋值给它并且传回。此时即相当于把1赋值给n1，但是并不执行yield部分。下面继续从yield的下一语句继续执行，然后重新运行到yield语句，执行后，跳出生成器函数。即send和next相比，只是开始多了一次赋值的动作，其他运行流程是相同的。
+```python
+def consumer():
+    r = 'hello'
+    while True:
+        n1=yield r  #这里的等式右边相当于一个整体，接受回传值
+        if not n1:
+            return
+        print('[CONSUMER] Consuming %s...' % n1)
+        r='%d00 OK' % n1
+c = consumer()
+c.__next__()
+n=0
+while n<3:
+    n=n+1
+    r1=c.send(n)
+    print('[PRODUCER] Consumer return: %s' % r1)
+c.close()
+```
+* 预激装饰器，使用协程之前必须预激，为了避免忘记，可以在协程上使用一个特殊的装饰器。
+```python
+from functools import wraps
+def corountine(func):
+    @wraps(func)                      
+    # functools.wraps 则可以将原函数对象的指定属性复制给包装函数对象, 默认有 __module__、__name__、__doc__,或者通过参数选择
+    def primer(*args, **kwargs):       # 把被装饰的生成器函数替换成这里的 primer 函数；调用 primer 函数时，返回预激后的生成器
+        gen = func(*args, **kwargs)    # 调用被装饰的函数，获取生成器对象。
+        next(gen)                      # 预激生成器
+        return gen                     # 返回生成器
+    return primer
+    
+@corountine               # 预激装饰器
+def coro_average():
+    total = 0.0
+    count = 0
+    average = None
+    while 1:
+        term = yield average
+        total += term
+        count += 1
+        average = total/count
+coro3 = coro_average()
+print (coro3.send(5))
+print (coro3.send(7))
+print (coro3.send(10))
+coro3.close()
+```
 ##### Python 面对对象编程
 ###### 封装
 * 将内容封装到某处
@@ -539,6 +544,7 @@ print(obj)
 10. __iter__用于迭代器，之所以列表、字典、元组可以进行for循环。
 11. `__new__和__init__`
 `__new__`是一个静态方法，而`__init__`是一个实例方法，`__new__`方法会返回一个创建的实例，而`__init__`什么都不返回，当创建一个新实例时调用`__new__`，初始化一个实例时用`__init__`。
+##### [Python自省和反射](https://www.cnblogs.com/huxi/archive/2011/01/02/1924317.html)
 ##### Python 中的元编程
 ##### 设计模式
 ###### 单例模式
@@ -551,9 +557,9 @@ print(obj)
 * 主要参考
   - [problem-solving-with-algorithms-and-data-structure-using-python 中文版](https://facert.gitbooks.io/python-data-structure-cn/)
   - 五分钟算法公众号
-* 数据结构都有啥，[戳这里](https://mp.weixin.qq.com/s?__biz=MzUyNjQxNjYyMg==&mid=2247485737&idx=1&sn=82fa3f103ef485a8ce28c5e1c5e012ea&chksm=fa0e66a8cd79efbeb88cb175fcc21a71964d975a47d3c87a8335506466937e811a066f8a1889&mpshare=1&scene=1&srcid=&sharer_sharetime=1564711256674&sharer_shareid=d8d88a642b42a12a54cd09298c974b8c#rd)就行
+* 常见数据结构[戳这里](https://mp.weixin.qq.com/s?__biz=MzUyNjQxNjYyMg==&mid=2247485737&idx=1&sn=82fa3f103ef485a8ce28c5e1c5e012ea&chksm=fa0e66a8cd79efbeb88cb175fcc21a71964d975a47d3c87a8335506466937e811a066f8a1889&mpshare=1&scene=1&srcid=&sharer_sharetime=1564711256674&sharer_shareid=d8d88a642b42a12a54cd09298c974b8c#rd)
 ##### 排序算法
-* 快排，堆排，归并排序详细原理参考这篇[这或许是东半球分析十大排序算法最好的一篇文章](https://mp.weixin.qq.com/s?__biz=MzUyNjQxNjYyMg==&mid=2247485556&idx=1&sn=344738dd74b211e091f8f3477bdf91ee&chksm=fa0e67f5cd79eee3139d4667f3b94fa9618067efc45a797b69b41105a7f313654d0e86949607&scene=21#wechat_redirect)，下面我将用 Python 快速实现出来。话不多说，Show me code!
+* 快排，堆排，归并排序详细原理参考这篇[这或许是东半球分析十大排序算法最好的一篇文章](https://mp.weixin.qq.com/s?__biz=MzUyNjQxNjYyMg==&mid=2247485556&idx=1&sn=344738dd74b211e091f8f3477bdf91ee&chksm=fa0e67f5cd79eee3139d4667f3b94fa9618067efc45a797b69b41105a7f313654d0e86949607&scene=21#wechat_redirect)，下面我将用 Python 快速实现出来。话不多说，Show Me Code!
 * 冒泡排序
 ```python
 def bubble_sort(alist):
@@ -704,9 +710,38 @@ class Solution:
         return head.next
 ```
 * 链表有环问题
-    * 判断链表是否有环
-    * 定位环入口
-    * 计算环长度
+```python
+# leetcode 142：判断链表是否有环/定位环入口/环长度，快慢双指针
+    class Solution(object):
+    def detectCycle(self, head):
+        if head is None:
+            return
+        slow=fast=head
+        has_cycle=False
+        while fast and fast.next:
+            slow=slow.next
+            fast=fast.next.next
+            if slow==fast:
+                has_cycle=True
+                break
+        if has_cycle:
+            slow_p=head
+            fast_p=fast
+            while slow_p !=fast_p:
+                fast_p=fast_P.next
+                slow_p=slow_p.next
+            return slow_p
+        return
+        # 环长度
+        slow=slow.next
+        fast=fast.next.next
+        length=1
+        while slow!=fast:
+            slow=slow.next
+            fast=fast.next.next
+            length+=1
+        return length
+```
 * 使用链表实现大数加法
 ```python
 # leetcode 2
@@ -726,25 +761,6 @@ class Solution:
             n.next=ListNode(val)
             n=n.next
         return root.next  
-```
-* 合并K个排序链表
-```python
-# leetcode 23
-class Solution:
-    def mergeKLists(self, lists: List[ListNode]) -> ListNode:
-        k_heap=[]
-        for i in lists:
-            while i:
-                k_heap.append(i.val)
-                i=i.next
-        if k_heap==[]:
-            return []
-        k_heap.sort()
-        head=cur=ListNode(0)
-        while k_heap:
-            cur.next=ListNode(k_heap.pop(0))
-            cur=cur.next
-        return head.next
 ```
 * 删除链表中节点，要求时间复杂度为O(1)
 ```python
@@ -927,7 +943,7 @@ class Solution:
 ```
 * 包含 min 函数的栈
 ```python
-# leetcode 155：实际上就是实现最小栈
+# leetcode 155：实际上就是实现最小栈（重点是连续弹出最小值时的问题）
 class MinStack:
 
     def __init__(self):
@@ -957,7 +973,211 @@ class MinStack:
     def getMin(self) -> int:
         return self.minstack[-1]
 ```
+* 验证栈序列
+```python
+# leetcode 946
+class Solution:
+    def validateStackSequences(self, pushed: List[int], popped: List[int]) -> bool:
+        tmp=[]
+        while pushed:
+            tmp.append(pushed.pop(0))
+            while tmp and tmp[-1]==popped[0]:
+                popped.pop(0)
+                tmp.pop()
+        return not tmp
+```
+* 约瑟夫环（双端队列实现）
+```python
+from pythonds.basic.queue import Queue
+def hotPotato(namelist,num):
+    simple_queue = Queue()
+    for name in namelist:
+        simple_queue.enqueue(name)
+    while simple_queue.size()>1:
+        for i in range(num):
+            simple_queue.enqueue(simple_queue.dequeue())
+        simple_queue.dequeue()
+    return simple_queue.dequeue()
+
+print(hotPotato(["Bill","David","Susan","Jane","Kent","Brad"],2))
+```
+* 合并K个排序链表（我刚开始用的暴力解法2333）
+    * 这个[解析](https://leetcode-cn.com/problems/merge-k-sorted-lists/solution/he-bing-kge-pai-xu-lian-biao-by-leetcode/)不错，我直接贴了其中采用最优队列的方式。
+```python
+# leetcode 23
+from Queue import PriorityQueue
+class Solution(object):
+    def mergeKLists(self, lists):
+        head = point = ListNode(0)
+        q = PriorityQueue()
+        for l in lists:
+            if l:
+                q.put((l.val, l))
+        while not q.empty():
+            val, node = q.get()
+            point.next = ListNode(val)
+            point = point.next
+            node = node.next
+            if node:
+                q.put((node.val, node))
+        return head.next
+```
 ##### 二叉树算法
+###### 四种遍历方式
+* 二叉树的四种遍历方式分别是：前序、中序、后序和层次。它们的时间复杂度都是O(n)，其中n是树中节点个数，因为每一个节点在递归的过程中，只访问了一次。
+* 三种深度优先遍历方法的空间复杂度是O(h)，其中h是二叉树的深度，额外空间是函数递归的调用栈产生的，而不是显示的额外变量。`空间复杂度，通常是指完成算法所用的辅助空间的复杂度，而不用管算法前置的空间复杂度。比如在树的遍历算法中，整棵树肯定要占O(n)的空间，n是树中节点的个数，这部分空间是“平凡”的，即肯定存在的，我们不讨论它。`
+* 层次遍历的空间复杂度是O(w)，其中w是二叉树的宽度（拥有最多节点的层的节点数）。
+![树的遍历.png](https://i.loli.net/2019/06/27/5d142fcec291f76765.png)
+* 前序遍历
+```python
+# 递归解法
+class Solution:
+    def preorderTraversal(self, root: TreeNode) -> List[int]:
+        ret=[]
+        if root:
+            ret=ret+[root.val]
+            ret=ret+self.preorderTraversal(root.left)
+            ret=ret+self.preorderTraversal(root.right)
+        return ret
+# 迭代算法思路：使用栈的思想，从根节点开始以此使用ret添加根节点值，stack添加右节点，
+# curr=左节点，如果左节点为None，则获取其上一个右节点（一直输出根节点，添加其右节点，
+# 遍历左节点，右节点的输出顺序为从下往上）
+class Solution:
+    def preorderTraversal(self, root: TreeNode) -> List[int]:
+        ret=[]
+        if root==None:
+            return ret
+        stack=[]
+        curr=root
+        while curr or stack:
+            if curr:
+                ret.append(curr.val)
+                stack.append(curr.right)
+                curr=curr.left
+            else:
+                curr=stack.pop()
+        return ret
+```
+* 中序遍历
+```python
+# 递归解法同上
+# 迭代解法
+class Solution:
+    def inorderTraversal(self, root: TreeNode) -> List[int]:
+        res=[]
+        if root==None:
+            return res
+        stack=[]  #添加根节点
+        curr=root
+        while curr or stack:
+            if curr:
+                stack.append(curr)
+                curr=curr.left
+            else:
+                curr=stack.pop()
+                res.append(curr.val)
+                curr=curr.right
+        return res
+```
+* 后序遍历
+```python
+# 递归解法同上
+# 迭代算法思路：后序遍历方式为：左右中，将其进行反转 中右左，
+# 那么我们可以实现一个中右左，其原理与前序遍历一样
+class Solution:
+    def postorderTraversal(self, root: TreeNode) -> List[int]:
+        ret=[]
+        if root==None:
+            return ret
+        stack=[]
+        curr=root
+        while curr or stack:
+            if curr:
+                ret.append(curr.val)
+                stack.append(curr.left)
+                curr=curr.right
+            else:
+                curr=stack.pop()
+        return ret[::-1]
+```
+* 层次遍历
+```
+class Solution:
+    def levelOrder(self, root: TreeNode) -> List[List[int]]:
+        level=[root]
+        ret=[]
+        if root==None:
+            return []
+        while level:
+            ret.append([i.val for i in level])
+            level=[kid for node in level for kid in (node.left,node.right) if kid]
+        return ret
+```
+###### 二叉树中的一些重要属性
+* 二叉树的最小深度
+```python
+class Solution:
+    def minDepth(self, root: TreeNode) -> int:
+        if not root:
+            return 0
+        if root.left==None or root.right==None:
+            return self.minDepth(root.left)+self.minDepth(root.right)+1
+        else:
+            return min(map(self.minDepth,(root.left,root.right)))+1
+```
+* 二叉树的层平均值
+```python
+class Solution:
+    def averageOfLevels(self, root: TreeNode) -> List[float]:
+        average=[]
+        if root:
+            level=[root]
+            while level:
+                average.append(sum(i.val for i in level)/len(level))
+                level=[kid for node in level for kid in (node.left,node.right) if kid]
+        return average
+```
+* 二叉树的直径
+    * 采用分治和递归的思想：根节点为root的二叉树的直径 = max(root-left的直径, root->right的直径，root->left的最大深度+root->right的最大深度+1)
+    * 分两种情况，1，最大直径经过根节点，则直径为左子树最大深度+右子树最大深度 2.如果不经过根节点，则取左子树或右子树的最大深度
+```python
+class Solution:
+    def diameterOfBinaryTree(self, root: TreeNode) -> int:
+        self.diameter=0
+        def dfs(root):
+            if root==None:
+                return 0
+            left=dfs(root.left)
+            right=dfs(root.right)
+            self.diameter=max(self.diameter,left+right)
+            return max(left,right)+1
+        dfs(root)
+        return self.diameter
+```
+* 两个二叉树的最低公共祖先节点
+```python
+'''
+思路：递归，如果当前节点就是p或q，说明当前节点就是最近的祖先；如果当前节点不是p或p，
+就试着从左右子树里找pq；如果pq分别在一左一右被找到，那么当前节点还是最近的
+祖先返回root就好了；否则，返回它们都在的那一边。
+'''
+class Solution:
+    def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
+        if root==None:   
+            return 
+        if root==p or root==q:
+            return root
+        left=self.lowestCommonAncestor(root.left,p,q)
+        right=self.lowestCommonAncestor(root.right,p,q)
+        if left and right:
+            return root
+        if left:
+            return left
+        if right:
+            return right
+        else:
+            return 
+```
 ##### 字符串算法
 * 最长公共前缀
 ```python
@@ -1001,15 +1221,79 @@ class Solution:
         return max_str
 ```
 ##### 哈希算法
+* 哈希冲突：开放地址法+链表法
+* 哈希查找
+```python
+class HashMap:
+    def __init__(self):
+        self.size = 11
+        self.slots = [None]*self.size
+        self.data = [None]*self.size
+
+    def put(self, key, data):
+        hash_value = self.hash(key, len(self.slots))
+        if self.slots[hash_value] == None:
+            self.slots[hash_value] = key
+            self.data[hash_value] = data
+        else:
+            # 键一样时替换
+            if self.slots[hash_value] == key:
+                self.data[hash_value] = data
+            else:
+                # 重新散列，+1线性探测
+                next_slot = self.rehash(hash_value, len(self.slots))
+                while self.slots[next_slot] != None and self.slots[next_slot] != key:
+                    next_slot = self.rehash(next_slot, len(self.slots))
+                if self.slots[next_slot] != None:
+                    self.slots[next_slot] = key
+                    self.data[next_slot] = data
+                else:
+                    self.data[next_slot] = data
+
+    def get(self, key):
+        start_slot = self.hash(key, len(self.slots))
+        found = False
+        data = None
+        stop = False
+        position = start_slot
+        while self.slots[position] != None and not stop and not found:
+            if self.slots[position] == key:
+                data = self.data[position]
+                found = True
+            else:
+                position = self.rehash(position,len(self.slots))
+                if position==start_slot:
+                    stop = True
+        return data 
+
+    def hash(self, key, size):
+        return key % size
+
+    def rehash(self, oldhash, size):
+        return (oldhash+1) % size
+
+    def __getitem__(self, key):
+        return self.get(key)
+
+    def __setitem__(self, key, data):
+        return self.put(key, data)
+hashmap=HashMap()
+hashmap[0]='cat'
+hashmap[1]='dog'
+hashmap[2]='bird'
+print(hashmap.slots)
+print(hashmap.data  )
+```
 * 两数之和
 ```python
 # leetcode 1
 class Solution:
     def twoSum(self, nums: List[int], target: int) -> List[int]:
-        #enumerate() 函数用于将一个可遍历的数据对象(如列表、元组或字符串)组合为一个索引序列，同时列出数据和数据下标
+        #enumerate() 函数用于将一个可遍历的数据对象(如列表、元组或字符串)
+        # 组合为一个索引序列，同时列出数据和数据下标
         demo_dict = dict((num,i)for i,num in enumerate(nums))
         for i,num in enumerate(nums):
-            #get() 方法和 [key] 方法的主要区别在于，[key] 在遇到不存在的 key 时会抛出 KeyError 错
+            #get()方法和[key]方法的主要区别在于[key]在遇到不存在的key时会抛出KeyError错
             j=demo_dict.get(target-num)
             if j and i!=j:
                 return [i,j]
@@ -1055,9 +1339,9 @@ class Solution:
             res[s[i:i+10]]=res.get(s[i:i+10],0)+1
         return [k for k,v in res.items() if v>=2]
 ```
-* 两个数组的交集 (leetcode 349)
 * 两个数组的交集 (leetcode 350)
 ```python
+# leetcode 350
 class Solution:
     def intersect(self, nums1: List[int], nums2: List[int]) -> List[int]:
         res=[]
@@ -1074,6 +1358,45 @@ class Solution:
         return res
 ```
 ##### [Backtracking回溯法(又称DFS,递归)全解](https://segmentfault.com/a/1190000006121957)
+* 17.(回溯法)电话号码的字母组合
+##### 动态规划
+* 硬币找零
+```python
+# need_change 为需要找零的金额，
+# currency_list 为该国货币的面值列表，
+# num_list 为需要找零的最少货币数目, num_list的长度至少为(need_change+1)
+# used_list 为需要找零的最少货币数目, 长度与num_list相同
+def giveChange(need_change, currency_list, num_list, used_list):
+    for change in range(need_change+1): #从0开始计算最少需要的货币数
+        for currency in currency_list: #遍历每一种货币
+            if (change-currency >= 0) and (num_list[change-currency]+1<=num_list[change]): #计算最少货币需求数
+                num_list[change] = num_list[change-currency] + 1
+                used_list[change] = currency #记录消耗的货币
+    return
+ 
+# 返回需要的货币
+def showChange(need_change, used_list):
+    give_list = []
+    while need_change > 0:
+        give_list.append(used_list[need_change])
+        need_change -= used_list[need_change]
+    give_list.sort() #排序
+    return give_list
+ 
+def main():
+    need_change = 63 #需要找零的钱数
+    currency_list = [1,5,10,21,25] # 该国的货币面值列表
+    num_list = list(range(need_change+1)) #初始化num_list为0到need_change,共(need_change+1)个数
+    used_list = list(range(need_change+1)) #初始化used_list为0到need_change,共(need_change+1)个数
+    giveChange(need_change, currency_list, num_list, used_list)
+    print("%d 需要 %d 个货币来找零"%(need_change, num_list[need_change]))
+    give_list = showChange(need_change, used_list)
+    print(give_list)
+ 
+if __name__ == "__main__":
+    main()
+```
+* 10.(DP法)正则表达式匹配
 ##### [2018 秋招笔试面经](https://github.com/imhuay/Algorithm_Interview_Notes-Chinese/tree/master/D-笔试面经#一面)
 #### 操作系统篇
 * 主要参考
