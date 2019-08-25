@@ -10,18 +10,18 @@
   - [面试总结](#面试总结)
 - [技术部分](#技术部分)
   - [语言特性篇](#语言特性篇)
-    - [谈谈对 Python 和其他语言的区别](#谈谈对-python-和其他语言的区别)
-    - [Python2和Python3的区别](#python2和python3的区别)
+    - [谈谈 Python 和其他语言的区别](#谈谈-python-和其他语言的区别)
+    - [Python 2和3的区别](#python-2和3的区别)
     - [闭包](#闭包)
-    - [装饰器(面向切面编程AOP)](#装饰器httpsfoofishnetpython-decoratorhtml面向切面编程aop)
-    - [Python垃圾回收机制(GC)](#python垃圾回收机制gchttpsmpweixinqqcoms__bizmzu1nzuzmziynwmid2247483786idx1snd9e490ff84da3140483595399ac9cc95chksmfc3510cecb4299d8230be48a50ac125b7dec379a654b50de0f28d1510879eb82b5ff5b0c1033mpshare1scene1srcidsharer_sharetime1565661971268sharer_shareidd8d88a642b42a12a54cd09298c974b8crd)
-    - [全局解释锁 GIL](#全局解释锁-gilhttpswwwlmlphpcomuser6793articleitem349814)
+    - [装饰器](#装饰器)
+    - [谈谈GC](#谈谈gc)
+    - [GIL的理解](#gil的理解)
     - [Python传参](#python传参)
-    - [Python 深拷贝和浅拷贝](#python-深拷贝和浅拷贝)
+    - [深拷贝和浅拷贝](#深拷贝和浅拷贝)
     - [鸭子类型](#鸭子类型)
     - [猴子补丁](#猴子补丁)
     - [Python中的作用域](#python中的作用域)
-    - [Python函数式编程](#python函数式编程)
+    - [函数式编程](#函数式编程)
       - [lambda函数](#lambda函数)
       - [map函数](#map函数)
       - [reduce函数](#reduce函数)
@@ -35,8 +35,8 @@
       - [类成员](#类成员)
       - [类成员的修饰符](#类成员的修饰符)
       - [类的特殊成员](#类的特殊成员)
-    - [Python自省和反射](#python自省和反射httpswwwcnblogscomhuxiarchive201101021924317html)
-    - [Python 中的元编程](#python-中的元编程)
+    - [Python自省指南](#python自省指南httpswwwibmcomdeveloperworkscnlinuxl-pyintindexhtml)
+    - [Python 中的元编程](#python-中的元编程httpswwwibmcomdeveloperworkscnanalyticslibraryba-metaprogramming-pythonindexhtml)
     - [设计模式](#设计模式)
       - [单例模式](#单例模式)
       - [工厂模式](#工厂模式httpssegmentfaultcoma1190000013053013)
@@ -49,9 +49,11 @@
       - [二叉树中的一些重要属性](#二叉树中的一些重要属性)
     - [字符串算法](#字符串算法)
     - [哈希算法](#哈希算法)
-    - [Backtracking回溯法(又称DFS,递归)全解](#backtracking回溯法又称dfs递归全解httpssegmentfaultcoma1190000006121957)
-    - [动态规划](#动态规划)
-    - [2018 秋招笔试面经](#2018-秋招笔试面经httpsgithubcomimhuayalgorithm_interview_notes-chinesetreemasterd-笔试面经一面)
+    - [常见算法基本思想](#常见算法基本思想)
+      - [回溯](#回溯)
+      - [分而治之](#分而治之)
+      - [动态规划](#动态规划)
+      - [分支界限](#分支界限)
   - [操作系统篇](#操作系统篇)
     - [进程与线程区别](#进程与线程区别)
     - [谈谈多线程并发](#谈谈多线程并发)
@@ -85,7 +87,7 @@
     - [TCP 三次握手](#tcp-三次握手)
     - [TCP 四次挥手](#tcp-四次挥手)
     - [TCP 怎样保证可靠性](#tcp-怎样保证可靠性)
-    - [TCP的流量控制和拥塞控制](#tcp的流量控制和拥塞控制httpsblogcsdnnetyechaodechuntianarticledetails25429143)
+    - [流量控制和拥塞控制](#流量控制和拥塞控制)
     - [TCP 与 UDP 的区别](#tcp-与-udp-的区别)
     - [HTTP协议](#http协议)
       - [HTTP 和 HTTPS 的区别](#http-和-https-的区别)
@@ -162,15 +164,15 @@
   - 第二个阶段冲刺：经过了第一个阶段的被虐之后，每个人的面试能力都会加强很多，而且找到了一些面试的感觉，对面试的节奏、对答都有了更好的把控。这个时候第二个阶段，就可以尝试去冲刺一下阿里、美团、滴滴等国内的一些大厂了。在这个阶段里，你需要全力以赴去面试，如果你准备的很充分，经过了第一阶段的打磨提升了面试能力和经验，而且本身的一些学历、过往公司履历相对较好，同时你的一些软素质比如说学习能力、表达能力、沟通能力都比较好，那么在这个阶段相对就会有更大的把握拿到大厂的offer了。但是如果冲刺了一些大厂之后，感觉还是有一定的差距导致没拿到大厂的offer呢？其实这也是很正常的一个现象，因为毕竟大厂的面试官问的问题可能会更难，让你更加难以承受，可能会暴露出来你更多的问题。在面大厂的过程中暴露出来的问题，很多时候就不是准备充分与否的问题了，而是可能暴露出来你的技术能力和知识体系的欠缺，很多东西可能你根本就不会。这对你来说是好事情，因为你通过面试大厂，瞬间会明白自己跟大厂之间的技术差距。这个时候有些技术能力跟大厂欠缺很大的同学一下子会被极大的打击自己的自信心，建议大家暂停一下面试的过程。这时，你完全可以将面大厂过程暴露出来的自己的技术能力的欠缺记录一个清单，然后有针对性的找一些技术资料来对这些不足之处进行学习和准备，尽可能的弥补自己的欠缺。
   - 第三个阶段收尾：假如说你的面试进行到了这个阶段，那么很不好意思，说明几个你最心仪的大厂没能进去。不过也没关系，这个时候如果你针对自己的技术短板进行突击学习之后，相信你的技术能力又会有一个成长和提高。此时你就应该针对你的跳槽进行收尾了，这个时候你可以投递一些中大型互联网公司的职位，同时再加上一些比较好的独角兽企业的职位，或者是一些你感觉技术氛围比较好的中小型互联网公司的职位。从笔者指导过的一些同学来看，你的面试能力积累到这个程度，基本上拿下一些offer是已经没问题了，你面试的时候都会比较游刃有余了。然后接着就可以在收获的几个比较好的offer里选择一个各方面最适合自己的offer。
 #### 面试总结
-* 本来我认为自己使用过的技术掌握就行，技术面试靠“面试总结”有点死记硬背应付的赶脚，但是一个面试老前辈说针对面试常见问题的进行记忆也是为了提升面试效果，再说技术广度如此大，要是都用过会被严重怀疑是个码农，不能从底层发现问题，只会照着api和框架coding，这也是为自己写这份总结的原因。
+* 本来我认为自己使用过的技术掌握就行，技术面试靠“面试总结”有点死记硬背应付的赶脚，但是实习公司mentor说针对面试常见问题的进行记忆也是为了提升面试效果，再说技术广度如此大，要是都用过会被严重怀疑是个码农，不能从底层发现问题，只会照着api和框架coding，这也是为自己写这份总结的原因。
 * 总结起来，面试是一场持久战，要软硬兼备。硬性条件：面试官考察候选人的时候主要是从技术广度、技术深度、基础功底、系统设计、项目经验几个角度来进行的，软性条件：表达交流能力和运气。
 ### 技术部分
 * 真正有用的部分，哈哈😄
 #### 语言特性篇
 * 主要参考：[《流畅的Python》](https://book.douban.com/subject/27028517/)
-##### 谈谈对 Python 和其他语言的区别
-* Python就是强类型、动态类型的语言
-##### Python2和Python3的区别
+##### 谈谈 Python 和其他语言的区别
+* Python是强类型、动态类型的语言
+##### Python 2和3的区别
 * python2中，print是个特殊语句，python3中print是函数。
 * python中有两种字符类型：字节字符串和文本字符串。
 
@@ -181,6 +183,7 @@
 * python2中默认的字符串类型默认是ASCII，python3中默认的字符串类型是Unicode。
 * python2中除法`/`的结果是整型，python3中是浮点类型。
 * python2中默认类是旧式类，需要显式继承新式类（object）来创建新式类。python3中完全移除旧式类，所有类都是新式类，但仍可显式继承object类。
+* 兼容问题：six库，2to3，__future__包
 ##### 闭包
 * 闭包指延伸(延伸的意思是seriers在average函数用，但在average_nums中定义的)了作用域的函数，访问定义体之外定义的非全局变量。创建一个闭包必须满足以下几点:
     - 必须有一个内嵌函数
@@ -220,7 +223,9 @@ def test(a):
     b=6
 test(3)
 ```
-##### [装饰器](https://foofish.net/python-decorator.html)(面向切面编程AOP)
+##### 装饰器
+* 主要参考
+    * [理解 Python 装饰器看这一篇就够了](https://foofish.net/python-decorator.html)
 * 闭包的一个重要应用就是装饰器，函数装饰器在导入模块时立即执行，被装饰的函数只在明确调用时执行。装饰器采用语法糖，使用方便，用途多样，既可以自定义在装饰器中指定日志级别，也可以使用官方提供的预激协程装饰器等等。
 ``` python
 # 手动实现一个带参数的装饰器
@@ -237,11 +242,15 @@ def demo():
     pass
 demo()
 ```
-##### [Python垃圾回收机制(GC)](https://mp.weixin.qq.com/s?__biz=MzU1NzUzMzIyNw==&mid=2247483786&idx=1&sn=d9e490ff84da3140483595399ac9cc95&chksm=fc3510cecb4299d8230be48a50ac125b7dec379a654b50de0f28d1510879eb82b5ff5b0c1033&mpshare=1&scene=1&srcid=&sharer_sharetime=1565661971268&sharer_shareid=d8d88a642b42a12a54cd09298c974b8c#rd)
-* 引用计数
-* 标记-清除机制
-* 分代回收
-##### [全局解释锁 GIL](https://www.lmlphp.com/user/6793/article/item/349814/)
+##### 谈谈GC
+* 主要参考
+    * [Python 进阶：浅析「垃圾回收机制」(上篇)](https://hackpython.com/blog/2019/07/05/Python%E8%BF%9B%E9%98%B6%EF%BC%9A%E6%B5%85%E6%9E%90%E3%80%8C%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6%E3%80%8D-%E4%B8%8A%E7%AF%87/)
+* 主要使用**引用计数**进行垃圾回收
+* 通过**标记-清理**解决容器对象产生循环引用的问题
+* 通过**分代回收**以空间换时间的方式来提高垃圾回收的效率
+##### GIL的理解
+* 主要参考
+    * [python中的GIL详解](https://www.cnblogs.com/SuKiWX/p/8804974.html)
 * GIL是一个防止多线程并发执行机器码的Mutex：cpython解释器的内存管理不是线程安全的，保护多线程情况下对python对象的访问，cpython使用简单的锁机制避免多个线程同时执行字节码。
 * 缺陷 ：限制程序的多核执行，同一时间只能有一个线程执行字节码，CPU密集型程序（大量时间花在计算上）难以利用多核优势；但是IO期间会释放GIL，对IO密集型程序(大量时间花在网络传输上，资源调度)影响小。
 * 规避影响策略：CPU密集型使用多进程+进程池，IO密集型采用多线程/协程的策略；cython扩展（将python转换为c代码）
@@ -262,13 +271,13 @@ for t in threads:
     t.start()
 print(n)
 ```
-* 剖析程序性能：内置profile/cprofile工具，使用pyflame(uber开源)工具分析web应用。
+* 剖析程序性能：内置profile/cprofile工具
 ##### Python传参
 * 主要参考
     - [Python传入参数的几种方法](https://blog.csdn.net/abc_12366/article/details/79627263)
 * Python中参数传递方式：位置传递、默认参数、可变参数、关键字参数、命名关键字参数
 * Python 函数参数传递实际叫传对象（call by object），可以把不可变对象传参理解为传值，可变对象参数理解为传引用。
-##### Python 深拷贝和浅拷贝
+##### 深拷贝和浅拷贝
 * 浅拷贝(copy)拷贝父对象，不会拷贝对象的内部的子对象。深拷贝(deepcopy)完全拷贝了父对象及其子对象。
 ```python
 import copy
@@ -304,7 +313,7 @@ Foo().bar()
 ```
 ##### Python中的作用域
 * Python的作用域一共有4种: L （Local） 局部作用域，E （Enclosing） 闭包函数外的函数中，G （Global） 全局作用域，B （Built-in） 内建作用域。以 L –> E –> G –>B 的规则查找，即：在局部找不到，便会去局部外的局部找（例如闭包），再找不到就会去全局找，再者去内建中找。
-##### Python函数式编程
+##### 函数式编程
 ###### lambda函数
 * lambda 定义了一个匿名函数，lambda 并不会带来程序运行效率的提高，只会使代码更简洁。使用lambda内不要包含循环，如果有，定义函数来完成，使代码获得可重用性和更好的可读性。lambda 是为了减少单行函数的定义而存在的。
 ```python
@@ -327,6 +336,10 @@ list(filter(is_odd, [1, 2, 4, 5, 6, 9, 10, 15]))
 ##### 迭代器和生成器
 * 主要参考
     - [Python中的可迭代对象、迭代器和生成器的异同点](https://blog.csdn.net/SL_World/article/details/86507872)
+![relationships.png](https://i.loli.net/2019/08/25/a9HQ6d1vxPNzeSl.png)
+* 可迭代对象和容器一样是一种通俗的叫法，并不是指某种具体的数据类型，可迭代对象实现了__iter__方法，该方法返回一个迭代器对象。
+* 迭代器有一种具体的迭代器类型，它是一个带状态的对象，他能在你调用next()方法的时候返回容器中的下一个值，迭代器不会一次性把所有元素加载到内存，而是需要的时候才生成返回结果(不同于容器)。任何实现了__iter__和__next__()方法的对象都是迭代器，__iter__返回迭代器自身，__next__返回容器中的下一个值，如果容器中没有更多元素了，则抛出StopIteration异常。迭代器每次调用next()方法的时候做两件事：为下一次调用next()方法修改状态，生成当前调用的返回结果。
+* 生成器其实是一种特殊的迭代器，这种迭代器更加优雅，它不需要写__iter__()和__next__()方法了，只需要一个yiled关键字， 生成器一定是迭代器（反之不成立）。
 ##### 协程
 * 主要参考
     - [Python协程深入理解](https://www.cnblogs.com/zhaof/p/7631851.html)
@@ -544,15 +557,69 @@ print(obj)
 10. __iter__用于迭代器，之所以列表、字典、元组可以进行for循环。
 11. `__new__和__init__`
 `__new__`是一个静态方法，而`__init__`是一个实例方法，`__new__`方法会返回一个创建的实例，而`__init__`什么都不返回，当创建一个新实例时调用`__new__`，初始化一个实例时用`__init__`。
-##### [Python自省和反射](https://www.cnblogs.com/huxi/archive/2011/01/02/1924317.html)
-##### Python 中的元编程
+##### [Python自省指南](https://www.ibm.com/developerworks/cn/linux/l-pyint/index.html)
+* 自省（Introspection）指运行时判断一个对象类型的能力，常见type，id，isinstance 等获取对象类型信息或Ispect模块中的函数获取详细信息。
+##### [Python 中的元编程](https://www.ibm.com/developerworks/cn/analytics/library/ba-metaprogramming-python/index.html)
+* 元类是创建类的类，元类允许我们控制类的生成（修改类的属性等），用type来定义元类，元类最常见的使用场景是 ORM 框架。
+```python
+# 通过元编程实现类自定义属性大写
+class Base(type):
+    def __new__(cls,name,bases,attrs):
+        upper_attrs={}
+        for k,v in attrs.items():
+            if not k.startswith("__"):
+                upper_attrs[k.upper()]=v
+            else:
+                upper_attrs[k]=v
+        return type.__new__(cls,name,bases,upper_attrs)
+class Foo(metaclass=Base):
+    foo=True
+    def hello(self):
+        print("world")
+def hello():
+    print("world")
+print(dir(Foo))
+```
 ##### 设计模式
 ###### 单例模式
-1. 使用new方法
-2. 共享属性
-3. 装饰器版本
-4. import方法
+* 单例模式（Singleton Pattern）是一种常用的软件设计模式，该模式的主要目的是确保某一个类只有一个实例存在。当你希望在整个系统中，某个类只能出现一个实例时，单例对象就能派上用场。（None就是单例）
+1. metaclass 实现
+```python
+class Singleton(type):
+    _instances = {}
+    def __call__(cls, *args, **kwargs):
+        if cls not in cls._instances:
+            cls._instances[cls] = super(Singleton, cls).__call__(*args, **kwargs)
+        return cls._instances[cls]
+
+class Foo(metaclass=Singleton):
+    pass
+foo1=Foo()
+foo2=Foo()
+print(id(foo1)==id(foo2))
+```
+2. 函数装饰器实现
+```python
+def singleton(cls):
+    _instance = {}
+    def wrapper():
+        if cls not in _instance:
+            _instance[cls] = cls()
+        return _instance[cls]
+    return wrapper
+    
+@singleton
+class Cls(object):
+    def __init__(self):
+        pass
+cls1 = Cls()
+cls2 = Cls()
+print(id(cls1) == id(cls2))
+```
+3. import方法
+* Python 的模块就是天然的单例模式
 ###### [工厂模式](https://segmentfault.com/a/1190000013053013)
+* 工厂模式是说调用方可以通过调用一个简单函数就可以创建不同的对象。工厂模式一般包含工厂方法和抽象工厂两种模式。
 #### 数据结构与算法篇
 * 主要参考
   - [problem-solving-with-algorithms-and-data-structure-using-python 中文版](https://facert.gitbooks.io/python-data-structure-cn/)
@@ -1221,8 +1288,11 @@ class Solution:
         return max_str
 ```
 ##### 哈希算法
-* 哈希冲突：开放地址法+链表法
-* 哈希查找
+* 哈希函数特性：确定性、哈希冲突，不可逆性，混淆特性
+    * 哈希表的 load factor（负载因子），越大表明哈希表中填的元素越多，越容易发生冲突
+    * 解决哈希冲突：开放寻址法（线性探测、二次探测、双重哈希），链表法
+    * 哈希洪水攻击
+* 实现哈希表
 ```python
 class HashMap:
     def __init__(self):
@@ -1357,47 +1427,85 @@ class Solution:
                 res.append(num)
         return res
 ```
-##### [Backtracking回溯法(又称DFS,递归)全解](https://segmentfault.com/a/1190000006121957)
-* 17.(回溯法)电话号码的字母组合
-##### 动态规划
+##### 常见算法基本思想
+###### 回溯 
+* 主要参考
+    * [Backtracking回溯法(又称DFS,递归)全解](https://segmentfault.com/a/1190000006121957)
+    * leetcode 22 / leetcode 39 / leetcode 40 /leetcode 46 / leetcode 79
+```python
+# leetcode 17
+class Solution(object):
+    def letterCombinations(self, digits):
+        """
+        :type digits: str
+        :rtype: List[str]
+        """
+        if not digits:
+            return []
+        d = {'2':"abc",
+             '3':"def",
+             '4':"ghi",
+             '5':"jkl",
+             '6':"mno",
+             '7':"pqrs",
+             '8':"tuv",
+             '9':"wxyz"
+            }
+        res = []
+        self.dfs(d, digits, "", res)
+        return res
+    
+    def dfs(self, d, digits, tmp , res):
+        if not digits:
+            res.append(tmp)
+        else:
+            for num in d[digits[0]]:
+                self.dfs(d, digits[1:], tmp + num, res)
+```
+###### 分而治之
+* leetcode 4 / leetcode 215 / leetcode 241
+```python
+# leetcode 215
+'''
+任意选定数组内一个数mark，将比其大和比其小的值分别放在左右两个数组里，接着判断两边数字
+的数量，如果左边的数量大于k个，说明第k大的数字存在于mark及mark左边的区域，对左半区执行
+partition函数；如果左边的数量小于k个，说明第k大的数字在mark和mark右边的区域之内，对右
+半区执行partition函数。直到左半区刚好有k-1个数，那么第k大的数就已经找到了。
+'''
+class Solution(object):
+    def findKthLargest(self, nums, k):
+        mark = random.choice(nums)
+        num1,num2=list(),list()
+        for num in nums:
+            if num>mark:
+                num1.append(num)
+            if num<mark:
+                num2.append(num)
+        if k<=len(num1):
+            return self.findKthLargest(num1,k)
+        if k>len(nums)-len(num2):
+            return self.findKthLargest(num2,k-(len(nums)-len(num2)))
+        return mark
+```
+###### 动态规划
 * 硬币找零
 ```python
-# need_change 为需要找零的金额，
-# currency_list 为该国货币的面值列表，
-# num_list 为需要找零的最少货币数目, num_list的长度至少为(need_change+1)
-# used_list 为需要找零的最少货币数目, 长度与num_list相同
-def giveChange(need_change, currency_list, num_list, used_list):
-    for change in range(need_change+1): #从0开始计算最少需要的货币数
-        for currency in currency_list: #遍历每一种货币
-            if (change-currency >= 0) and (num_list[change-currency]+1<=num_list[change]): #计算最少货币需求数
-                num_list[change] = num_list[change-currency] + 1
-                used_list[change] = currency #记录消耗的货币
-    return
- 
-# 返回需要的货币
-def showChange(need_change, used_list):
-    give_list = []
-    while need_change > 0:
-        give_list.append(used_list[need_change])
-        need_change -= used_list[need_change]
-    give_list.sort() #排序
-    return give_list
- 
-def main():
-    need_change = 63 #需要找零的钱数
-    currency_list = [1,5,10,21,25] # 该国的货币面值列表
-    num_list = list(range(need_change+1)) #初始化num_list为0到need_change,共(need_change+1)个数
-    used_list = list(range(need_change+1)) #初始化used_list为0到need_change,共(need_change+1)个数
-    giveChange(need_change, currency_list, num_list, used_list)
-    print("%d 需要 %d 个货币来找零"%(need_change, num_list[need_change]))
-    give_list = showChange(need_change, used_list)
-    print(give_list)
- 
-if __name__ == "__main__":
-    main()
+# leetcode 322
+class Solution(object):
+    def coinChange(self, coins, amount):
+    # 建一个长度是 amount + 1的dp数组，构成面额从0到 amount需要使用的最少硬币数量。
+        dp = [0] + [-1] * amount
+        for x in range(amount):
+            if dp[x] < 0:
+                continue
+            for c in coins:
+                if x + c > amount:
+                    continue
+                if dp[x + c] < 0 or dp[x + c] > dp[x] + 1:
+                    dp[x + c] = dp[x] + 1
+        return dp[amount]
 ```
-* 10.(DP法)正则表达式匹配
-##### [2018 秋招笔试面经](https://github.com/imhuay/Algorithm_Interview_Notes-Chinese/tree/master/D-笔试面经#一面)
+###### 分支界限
 #### 操作系统篇
 * 主要参考
    - [哈工大李治军老师的OS](https://www.icourse163.org/course/HIT-1002531008)
@@ -1456,7 +1564,8 @@ if __name__ == "__main__":
     - [分页机制图文详解](https://www.jianshu.com/p/3558942fe14f)
 * 一级页表的弊端：
     - 每存取一个数据，需两次访问内存，第一次访问内存中的页表，第二次访问内存中的数据，效率较低。改进：增设一个具有并行查寻能力的特殊高速缓冲寄存器，称为“联想寄存器”或“快表”，IBM中称为TLB，用于存放当前访问的那些页表项。
-    - IA-32体系结构中，处理器为32位，可寻址 2^32 =4GB的虚拟地址空间，若每页大小为4KB，则共分为4GB/4KB= 2^20 =1048576页，因此页表中应有1048576项，每个页表项为4B，则一个页表需要4MB的连续的物理内存，每个进程都需要自身的页表占4MB，将导致大量内存用于保存进程的页表。改进：采用两级页表，每页中存2^10 项，共分为2^10 页，并新增一个页目录表来记录这 2^10 页表的地址与信息，因此页目录表大小为2^10*4B=4KB放在内存中，需要具体的表再由此读入。采用离散分配方式代替原来页表需要的连续物理内存，将当前需要的部分页表项调入内存，其余页表项仍驻留在磁盘上，需要时再调入。
+    - IA-32体系结构中，处理器为32位，可寻址 2^32 =4GB的虚拟地址空间，若每页大小为4KB，则共分为4GB/4KB= 2^20 =1048576页，因此页表中应有1048576项，每个页表项为4B，则一个页表需要4MB的连续的物理内存，每个进程都需要自身的页表占4MB，将导致大量内存用于保存进程的页表。
+    - 改进：采用两级页表，每页中存2^10 项，共分为2^10 页，并新增一个页目录表来记录这 2^10 页表的地址与信息，因此页目录表大小为2^10*4B=4KB放在内存中，需要具体的表再由此读入。采用离散分配方式代替原来页表需要的连续物理内存，将当前需要的部分页表项调入内存，其余页表项仍驻留在磁盘上，需要时再调入。
 ##### 分页和分段有什么区别（内存管理）
 * 主要参考
     - [分段和分页内存管理](https://blog.csdn.net/bupt_tinyfisher/article/details/8939689)
@@ -1517,7 +1626,11 @@ if __name__ == "__main__":
     * **信号量**主要作为进程之间及同一种进程的不同线程之间得同步和互斥手段；信号量（semaphore）与已经介绍过的 IPC 结构不同，它是一个计数器。信号量用于实现进程间的互斥与同步，而不是用于存储进程间通信数据。特点：信号量用于进程间同步，若要在进程间传递数据需要结合共享内存。[信号量基于操作系统的 PV 操作](https://blog.csdn.net/u014495460/article/details/82883282)，程序对信号量的操作都是原子操作。每次对信号量的 PV 操作不仅限于对信号量值加 1 或减 1，而且可以加减任意正整数。支持信号量组。
     * **套接字**，这是一种更为一般得进程间通信机制，它可用于网络中不同机器之间的进程间通信，应用非常广泛。
 ##### [僵尸进程和孤儿进程](https://www.cnblogs.com/Anker/p/3271773.html#3777880)
+* 孤儿进程：一个父进程退出，而它的一个或多个子进程还在运行，那么那些子进程将成为孤儿进程。孤儿进程将被init进程(进程号为1)所收养，并由init进程对它们完成状态收集工作。
+* 僵尸进程：一个进程使用fork创建子进程，如果子进程退出，而父进程并没有调用wait或waitpid获取子进程的状态信息，那么子进程的进程描述符仍然保存在系统中。这种进程称之为僵死进程。
 ##### [fork进程](https://blog.csdn.net/u013851082/article/details/76902046)
+* 由fork创建的新进程被称为子进程（child process）。该函数被调用一次，但返回两次。两次返回的区别是子进程的返回值是0，而父进程的返回值则是新进程（子进程）的进程 id。将子进程id返回给父进程的理由是：因为一个进程的子进程可以多于一个，没有一个函数使一个进程可以获得其所有子进程的进程id。对子进程来说，之所以fork返回0给它，是因为它随时可以调用getpid()来获取自己的pid；也可以调用getppid()来获取父进程的id。(进程id 0总是由交换进程使用，所以一个子进程的进程id不可能为0 )。
+* fork之后，操作系统会复制一个与父进程完全相同的子进程，虽说是父子关系，但是在操作系统看来，他们更像兄弟关系，这2个进程共享代码空间，但是数据空间是互相独立的，子进程数据空间中的内容是父进程的完整拷贝，指令指针也完全相同，子进程拥有父进程当前运行到的位置。
 ##### Socket编程
 * [Socket Programming in Python (Guide)](https://realpython.com/python-sockets/)
 ![20190507170534122.png](https://i.loli.net/2019/08/13/e1MknSJRAbXI3du.png)
@@ -1591,7 +1704,7 @@ if __name__ == "__main__":
     - [协议森林](https://www.cnblogs.com/vamei/archive/2012/12/05/2802811.html)
     - [HTTP协议详解](https://www.cnblogs.com/TankXiao/archive/2012/02/13/2342672.html)
 ##### [从URL输入到页面展现到底发生什么？](https://mp.weixin.qq.com/s?__biz=Mzg5ODA5NTM1Mw==&mid=2247483803&idx=1&sn=460597ae3bd3ec10ad3426b7db605074&chksm=c066800df711091b2b6e005a922fff4a6a8e4b7930928a1c60fc0ac657c3ea5061cf1b51563d&mpshare=1&scene=1&srcid=#rd)
-* DNS查询，ARP解析，TCP三次握手连接，HTTP请求，反向代理Nginx，uwsgi/gunicorn（WSGI服务器）,服务器响应，浏览器页面渲染，TCP四次挥手，拜拜
+* DNS查询，ARP解析，TCP三次握手连接，HTTP请求，反向代理Nginx，uwsgi/gunicorn（WSGI服务器）,服务器响应，浏览器页面渲染，TCP四次挥手。
 ##### ARP 协议工作原理
 * 网络层的 ARP 协议完成了 IP 地址与物理地址的映射。首先，每台主机都会在自己的 ARP 缓冲区中建立一个 ARP列表，以表示 IP 地址和 MAC 地址的对应关系。当源主机需要将一个数据包要发送到目的主机时，会首先检查自己 ARP 列表中是否存在该 IP 地址对应的 MAC 地址：如果有，就直接将数据包发送到这个 MAC 地址；如果没有，就向本地网段发起一个 ARP 请求的广播包，查询此目的主机对应的 MAC 地址。此 ARP 请求数据包里包括源主机的 IP 地址、硬件地址、以及目的主机的 IP 地址。网络中所有的主机收到这个 ARP 请求后，会检查数据包中的目的 IP 是否和自己的 IP 地址一致。如果不相同就忽略此数据包；如果相同，该主机首先将发送端的 MAC 地址和 IP 地址添加到自己的 ARP 列表中，如果 ARP 表中已经存在该 IP 的信息，则将其覆盖，然后给源主机发送一个 ARP 响应数据包，告诉对方自己是它需要查找的 MAC 地址；源主机收到这个 ARP 响应数据包后，将得到的目的主机的 IP 地址和 MAC 地址添加到自己的 ARP 列表中，并利用此信息开始数据的传输。如果源主机一直没有收到 ARP 响应数据包，表示 ARP 查询失败。
 ##### TCP 三次握手
@@ -1610,8 +1723,12 @@ if __name__ == "__main__":
 * 应答机制：当 TCP 收到发自 TCP 连接另一端的数据，它将发送一个确认。这个确认不是立即发送，通常将推迟几分之一秒；
 * 超时重发：当 TCP 发出一个段后，它启动一个定时器，等待目的端确认收到这个报文段。如果不能及时收到一个确认，将重发这个报文段；
 * 流量控制：TCP 连接的每一方都有固定大小的缓冲空间。TCP 的接收端只允许另一端发送接收端缓冲区所能接纳的数据，这可以防止较快主机致使较慢主机的缓冲区溢出，这就是流量控制。TCP 使用的流量控制协议是可变大小的滑动窗口协议。
-##### [TCP的流量控制和拥塞控制](https://blog.csdn.net/yechaodechuntian/article/details/25429143)
-* 计算机网络中的带宽、交换结点中的缓存及处理机等都是网络的资源。在某段时间，若对网络中某一资源的需求超过了该资源所能提供的可用部分，网络的性能就会变坏，这种情况就叫做拥塞。拥塞控制就是 防止过多的数据注入网络中，这样可以使网络中的路由器或链路不致过载。注意，拥塞控制和流量控制不同，前者是一个全局性的过程，而后者指点对点通信量的控制。
+##### 流量控制和拥塞控制
+* 主要参考
+    * [TCP的流量控制和拥塞控制](https://blog.csdn.net/yechaodechuntian/article/details/25429143)
+* 区别注意，拥塞控制和流量控制不同，前者是一个全局性的过程，而后者指点对点通信量的控制。
+    - 拥塞控制：拥塞控制是作用于网络的，它是防止过多的数据注入到网络中，避免出现网络负载过大的情况；常用的方法就是：慢开始、拥塞避免；快重传、快恢复。
+    - 流量控制：流量控制是作用于接收者的，它是控制发送者的发送速度从而使接收者来得及接收，防止分组丢失的。
 ##### TCP 与 UDP 的区别
 * TCP 是面向连接的，UDP 是无连接的；
 * TCP 是可靠的，UDP 是不可靠的；
@@ -1686,6 +1803,10 @@ anchor             锚
 * 大小限制：Cookie 有大小限制并且浏览器对每个站点也有 cookie 的个数限制，Session 没有大小限制，理论上只与服务器的内存大小有关；
 * 服务器资源消耗：Session 是保存在服务器端上会存在一段时间才会消失，如果 session 过多会增加服务器的压力。
 ##### JSON Web Token
+* 主要参考
+    - [JSON Web Token 入门教程](http://www.ruanyifeng.com/blog/2018/07/json_web_token-tutorial.html)
+![1821058-2e28fe6c997a60c9.png](https://i.loli.net/2019/08/25/EKdXuH2ib9gIzyn.png)
+* JWT 是为了在网络应用环境间传递声明而执行的一种基于JSON的开放标准，该token被设计为紧凑且安全的，特别适用于分布式站点的单点登录场景。JWT的声明一般被用来在身份提供者和服务提供者间传递被认证的用户身份信息，以便于从资源服务器获取资源，也可以增加一些额外的其它业务逻辑所必须的声明信息，该token也可直接被用于认证，也可被加密。
 ##### IP 地址的分类
 * IP 地址是指互联网协议地址，是 IP 协议提供的一种统一的地址格式，它为互联网上的每一个网络和每一台主机分配一个逻辑地址，以此来屏蔽物理地址的差异。IP 地址编址方案将 IP 地址空间划分为 A、B、C、D、E 五类，其中 A、B、C 是基本类，D、E 类作为多播和保留使用，为特殊地
 址。
@@ -1699,9 +1820,8 @@ anchor             锚
 ![OSI网络参考模型功能表示.png](https://i.loli.net/2019/08/15/HKS5TkxRfrbMVpC.png)
 #### 数据库篇
 * 主要参考
-    - [MySQL 学习资源整理](https://blog.csdn.net/orangleliu/article/details/54694272)
     - [知乎龚子捷的回答](https://www.zhihu.com/question/34840297/answer/272185020)
-    - [高性能MySQL》](https://book.douban.com/subject/23008813/)
+    - [《高性能MySQL》](https://book.douban.com/subject/23008813/)
 ##### MySQL 基础问题
 * 常用 SQL 语句
     * 内连接，左连接，全连接
