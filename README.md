@@ -1675,6 +1675,7 @@ if __name__ == "__main__":
     3. 如果一个TCP服务器既要处理监听套接口，又要处理已连接套接口，一般也要用到I/O复用
     4. 如果一个服务器即要处理TCP，又要处理UDP，一般要使用I/O复用。
     5.  如果一个服务器要处理多个服务或多个协议，一般要使用I/O复用。
+* [用Python实现多用户/多服务器模型](https://github.com/MorsoLi/python-interview-guide/tree/master/server-program)
 ###### select
 * select 函数监视的文件描述符分3类，分别是writefds、readfds、和exceptfds。调用后select函数会阻塞，直到有描述符就绪（有数据 可读、可写、或者有except），或者超时（timeout指定等待时间，如果立即返回设为null即可），函数返回。当select函数返回后，可以通过遍历fdset，来找到就绪的描述符。
 ###### poll
