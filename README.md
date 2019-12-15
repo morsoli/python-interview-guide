@@ -2036,6 +2036,7 @@ appendfsync no  # 完全依赖操作系统，效率最佳，效果没法保证
     * 尽量避免在压力很大的主库上增加从库
 ### 最佳实践
 * [Phodal的全栈增长工程师实战](http://growth-in-action.phodal.com/)
+![](./img/web7.jpeg)
 #### 编码规范
 * PEP8
 * Python 之禅
