@@ -2073,6 +2073,8 @@ appendfsync no  # 完全依赖操作系统，效率最佳，效果没法保证
     * 异常值（none，空值，非法值）
 #### CI/CD工具篇
 * [谁才是世界上最好的 CI/CD 工具？](https://mp.weixin.qq.com/s?__biz=MjM5MjAwODM4MA==&mid=2650721534&idx=1&sn=1db6a5f66ee4d6b3d336c082ed04f1e0&chksm=bea6bd2d89d1343be60df41638d0b2992684b1a140d15ee25ac332ab2cbd9708a0fb675fe90a&mpshare=1&scene=1&srcid=#rd)
+#### Vim 编辑器
+![Vim](./img/vim.png)
 #### [Git飞行规则(Flight Rules)](https://github.com/k88hudson/git-flight-rules/blob/master/README_zh-CN.md)
 #### Docker 篇
 * [用Docker部署一个Web应用](https://zhuanlan.zhihu.com/p/26418829)
@@ -2093,22 +2095,6 @@ appendfsync no  # 完全依赖操作系统，效率最佳，效果没法保证
 * 由于非对称加密的方式不需要发送用来解密的私钥，所以可以保证安全性；但是和对称加密比起来，它非常的慢，所以我们还是要用对称加密来传送消息，但对称加密所使用的密钥我们可以通过非对称加密的方式发送出去。
 * [用于消息验证的hash算法：HMAC](https://www.biaodianfu.com/hmac.html)
 ![](https://b2.bmp.ovh/imgs/2019/08/a94b2ab7387fe433.png)
-#### Nginx篇
-* 主要参考
-    - [nginx源码分析](https://blog.csdn.net/yusiguyuan/article/category/2091295)
-    - [深入浅出搞懂Nginx](https://zhuanlan.zhihu.com/p/34943332)
-#### Vue篇
-- [Vue](http://yangyi1024.com/2017/05/31/Vue%E6%9C%80%E5%85%A8%E5%AE%9E%E6%88%98%E6%95%99%E7%A8%8B%E7%B3%BB%E5%88%971-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/)
-#### Django篇
-* [Django初步使用Celery](http://yshblog.com/blog/163)
-* [URL Dispatcher](https://blog.csdn.net/hackerain/article/details/40701099)
-* [Class-based View](https://blog.csdn.net/hackerain/article/details/40919789)
-##### WSGI、uwsgi、uWSGI 区别
-* 主要参考
-    * [Web 开发规范 — WSGI](https://blog.csdn.net/Jmilk/article/details/52036911)
-* WSGI：全称是Web Server Gateway Interface，WSGI不是服务器，python模块，框架，API或者任何软件，只是一种规范，描述web server如何与web application通信的规范。server和application的规范在[PEP 3333](https://www.python.org/dev/peps/pep-3333/)中有具体描述。要实现WSGI协议，必须同时实现web server和web application，当前运行在WSGI协议之上的web框架有Bottle, Flask, Django。
-* uwsgi：与WSGI一样是一种通信协议，是uWSGI服务器的独占协议，用于定义传输信息的类型(type of information)，每一个uwsgi packet前4byte为传输信息类型的描述，与WSGI协议是两种东西，据说该协议是fcgi协议的10倍快。
-* uWSGI：是一个web服务器，实现了WSGI协议、uwsgi协议、http协议等。
 #### 正则表达式篇
 * [可能是最好的正则表达式的教程笔记了吧...](https://juejin.im/post/5b5db5b8e51d4519155720d2)
 ### 其他
