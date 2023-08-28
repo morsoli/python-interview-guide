@@ -374,56 +374,59 @@ list(filter(is_odd, [1, 2, 4, 5, 6, 9, 10, 15]))
 * 迭代器有一种具体的迭代器类型，它是一个带状态的对象，他能在你调用next()方法的时候返回容器中的下一个值，迭代器不会一次性把所有元素加载到内存，而是需要的时候才生成返回结果(不同于容器)。任何实现了__iter__和__next__()方法的对象都是迭代器，__iter__返回迭代器自身，__next__返回容器中的下一个值，如果容器中没有更多元素了，则抛出StopIteration异常。迭代器每次调用next()方法的时候做两件事：为下一次调用next()方法修改状态，生成当前调用的返回结果。
 * 生成器其实是一种特殊的迭代器，这种迭代器更加优雅，它不需要写__iter__()和__next__()方法了，只需要一个yiled关键字， 生成器一定是迭代器（反之不成立）。
 ##### 协程
-* 主要参考
-    - [Python协程深入理解](https://www.cnblogs.com/zhaof/p/7631851.html)
-* 协程调用细节：实际上next()和send()在一定意义上作用是相似的，区别是send()可以传递yield表达式的值进去，而next()不能传递特定的值，只能传递None进去。因此，我们可以看做c.next() 和 c.send(None) 作用是一样的。第一次调用时，请使用next()语句或是send(None)，不能使用send发送一个非None的值，否则会出错的，因为没有Python yield语句来接收这个值。
-* send执行的顺序。n1 = yield r这句话是从右往左执行的。当第一次send（None）时，启动生成器，从生成器函数的第一行代码开始执行，直到第一次执行完yield后，跳出生成器函数。这个过程中，n1一直没有定义。运行到send（1）时，进入生成器函数，此时，将yield r看做一个整体，赋值给它并且传回。此时即相当于把1赋值给n1，但是并不执行yield部分。下面继续从yield的下一语句继续执行，然后重新运行到yield语句，执行后，跳出生成器函数。即send和next相比，只是开始多了一次赋值的动作，其他运行流程是相同的。
+协程（Coroutines）是一种轻量级的并发编程方式，用于在单线程中实现多个函数的并发执行。协程允许在函数执行过程中暂停，并在之后恢复执行，从而实现非抢占式的多任务处理。在Python中，协程可以使用`async`和`await`关键字来定义和管理。
+
+适用场景：
+
+1. **高并发网络应用：** 协程适用于高并发网络应用，如Web服务器。通过使用协程，可以在一个线程内处理多个客户端请求，从而减少线程切换和线程开销，提高并发处理能力。
+
+2. **异步I/O操作：** 协程适用于需要大量I/O操作的情况，如文件读写、数据库查询等。协程可以在等待I/O操作时释放控制权，允许其他协程执行，从而提高程序的吞吐量。
+
+3. **事件驱动编程：** 协程适用于事件驱动的编程模型，如图形界面应用、游戏引擎等。协程可以处理事件的回调逻辑，而不需要创建大量的回调函数。
+
+4. **批量处理任务：** 协程适用于批量处理任务的情况，如数据处理、爬虫等。协程可以并发执行多个任务，从而加速任务的处理过程。
+
+为何还需要协程：
+
+尽管线程提供了一种并发处理方式，但线程存在一些问题，如线程切换开销高、线程安全等。相比之下，协程有以下优势：
+
+1. **轻量级：** 协程比线程更加轻量级，占用的内存和资源更少。
+
+2. **无需线程锁：** 在多线程环境下，需要考虑线程安全和锁的问题。而协程在单线程中执行，不需要额外的线程同步机制。
+
+3. **更容易管理：** 由于协程在单线程中执行，因此避免了多线程中的竞争条件和死锁问题，使得并发编程更容易管理和调试。
+
+4. **高效的I/O操作：** 协程可以充分利用I/O操作的等待时间，从而实现高效的非阻塞I/O操作。
+
+**示例：网络爬虫程序**
+
+1. **含义：** 协程是一种非抢占式的并发编程方式，可以在一个线程中实现多个函数的并发执行。在网络爬虫中，协程允许你同时发送多个HTTP请求并处理响应。
+
+2. **适用场景：** 网络爬虫程序需要从多个网页上获取数据，而网页的下载和处理是I/O密集型操作。协程可以在等待一个网页下载时切换到另一个协程，从而充分利用等待时间。
+
+3. **为何需要协程：** 尽管可以使用多线程实现并发下载，但线程切换和线程安全的问题可能会导致复杂的编程和调试。而协程可以在单线程中实现高并发下载，避免线程切换开销和线程安全问题。
+
 ```python
-def consumer():
-    r = 'hello'
-    while True:
-        n1=yield r  #这里的等式右边相当于一个整体，接受回传值
-        if not n1:
-            return
-        print('[CONSUMER] Consuming %s...' % n1)
-        r='%d00 OK' % n1
-c = consumer()
-c.__next__()
-n=0
-while n<3:
-    n=n+1
-    r1=c.send(n)
-    print('[PRODUCER] Consumer return: %s' % r1)
-c.close()
-```
-* 预激装饰器，使用协程之前必须预激，为了避免忘记，可以在协程上使用一个特殊的装饰器。
-```python
-from functools import wraps
-def corountine(func):
-    @wraps(func)                      
-    # functools.wraps 则可以将原函数对象的指定属性复制给包装函数对象, 默认有 __module__、__name__、__doc__,或者通过参数选择
-    def primer(*args, **kwargs):       # 把被装饰的生成器函数替换成这里的 primer 函数；调用 primer 函数时，返回预激后的生成器
-        gen = func(*args, **kwargs)    # 调用被装饰的函数，获取生成器对象。
-        next(gen)                      # 预激生成器
-        return gen                     # 返回生成器
-    return primer
+import asyncio
+import aiohttp
+
+async def fetch_url(url):
+    async with aiohttp.ClientSession() as session:
+        async with session.get(url) as response:
+            return await response.text()
+
+async def main():
+    urls = ['https://example.com', 'https://google.com', 'https://github.com']
+    tasks = [fetch_url(url) for url in urls]
+    responses = await asyncio.gather(*tasks)
     
-@corountine               # 预激装饰器
-def coro_average():
-    total = 0.0
-    count = 0
-    average = None
-    while 1:
-        term = yield average
-        total += term
-        count += 1
-        average = total/count
-coro3 = coro_average()
-print (coro3.send(5))
-print (coro3.send(7))
-print (coro3.send(10))
-coro3.close()
+    for url, response in zip(urls, responses):
+        print(f"Response from {url}: {len(response)} bytes")
+
+if __name__ == "__main__":
+    asyncio.run(main())
 ```
+在上面的示例中，`fetch_url`函数使用`aiohttp`库发送异步HTTP请求，而`main`函数创建了多个协程来并发执行。每个协程在等待HTTP响应时会切换到其他协程，从而实现了高并发的网络爬虫。
 ##### Python 面对对象编程
 ###### 封装
 * 将内容封装到某处
