@@ -244,18 +244,36 @@ test(3)
 * 闭包的一个重要应用就是装饰器，函数装饰器在导入模块时立即执行，被装饰的函数只在明确调用时执行。装饰器采用语法糖，使用方便，用途多样，既可以自定义在装饰器中指定日志级别，也可以使用官方提供的预激协程装饰器等等。
 ``` python
 # 手动实现一个带参数的装饰器
-def use_arg(argument):
-    def decorate(fun):
-        def wrapper(*args,**kwargs):
-            print('%s is running'%fun.__name__)
-            print('传入的参数 %s'%argument)
-            return fun()  
+import time
+
+def rate_limit(max_requests, time_window):
+    def decorator(func):
+        requests = []
+        
+        def wrapper(*args, **kwargs):
+            now = time.time()
+            # 移除超出时间窗口的请求记录
+            while requests and now - requests[0] > time_window:
+                requests.pop(0)
+            if len(requests) >= max_requests:
+                print("Rate limit exceeded. Please try again later.")
+                return
+            requests.append(now)
+            return func(*args, **kwargs)
+        
         return wrapper
-    return decorate
-@use_arg('hahhaa')
-def demo():
-    pass
-demo()
+    
+    return decorator
+
+# 限制每5秒内只能有2次请求
+@rate_limit(max_requests=2, time_window=5)
+def process_request(request):
+    print("Processing request:", request)
+
+# 测试
+for i in range(5):
+    process_request(i)
+    time.sleep(1)
 ```
 ##### 谈谈GC
 * 主要参考
